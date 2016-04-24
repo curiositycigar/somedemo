@@ -176,6 +176,20 @@
 		</div>
 		<div id="page2">
 			<div id="test" style="position:relative;margin:20px;color:#fff;width:200px;height:100px;overflow:hidden;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div id="test1" style="position:relative;margin:20px;color:#fff;width:200px;height:300px;overflow:hidden;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago
+			"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div id="test2" style="position:relative;margin:20px;color:#fff;width:200px;height:300px;overflow:hidden;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago
+			"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
 			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
 			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
 			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
@@ -198,14 +212,6 @@
 			var pos={x:0,y:0};
 			var left=0,top=0;
 			var current=element;
-			if(element!=document){
-				while(current.tagName!="html" && current.tagName!="HTML"){
-					left+=current.offsetLeft;
-					top+=current.offsetTop;
-					current=current.parentNode;
-				}
-			}
-			console.log(left+":"+top);
 			element.addEventListener("mousemove",function(e){
 				if(e.pageX && e.pageY){
 					pos.x=e.pageX;
@@ -214,13 +220,14 @@
 					pos.x=e.clientX+document.body.scrollLeft||document.documentElement.scrollLeft;
 					pos.y=e.clientY+document.body.scrollTop||document.documentElement.scrollTop;
 				}
-				pos.x-=left;
-				pos.y-=top;
+				pos.x-=element.getBoundingClientRect().left;
+				pos.y-=element.getBoundingClientRect().top;
+				console.log(element.getBoundingClientRect().left);
+				console.log(pos);
 			},false);
 			return pos;
 		}
 		//
-		//changeCurtain.mousePos=changeCurtain.getMousePos(document);
 		//伪数组转换
 		changeCurtain.byClass=function(className){
 			var ret=[],i=0;
@@ -268,12 +275,15 @@
 			var tag=element.addEventListener("click",fn,false);
 		}
 		//create your scrollbar(在css中设置overflow:hidden)
-		changeCurtain.createScrollBar=function(element,barCss,barWayCss,barRight){
+		changeCurtain.createScrollBar=function(element,barCss,barWayCss){
+			if(element.scrollHeight<=element.clientHeight) return;
+			element.setAttribute("data-scroll-target","true");
+			var scrollFlag=null;
 			var barBlock=document.createElement("div"),
 			    bar=document.createElement("div"),
 			    barWay=document.createElement("div");
 			var pos=null,scrollHeight=null,height=element.clientHeight,width=element.clientwidth;
-			var barBlockCss={position:"absolute",top:"10%",right:barRight||"20px",height:"80%",width:"0"};
+			var barBlockCss={position:"absolute",top:"10%",right:"20px",height:"80%",width:"0"};
 			var barCssDefault=[{position:"absolute",cursor:"pointer",top:"0",right:"0"},{width:"20px",height:"20px",borderRadius:"10px",backgroundColor:"#fff",marginTop:"-10px",marginRight:"-10px"}];
 			var barWayCssDefault=[{position:"absolute",cursor:"pointer",top:"0",right:"0",height:"100%"},{width:"10px",borderRadius:"10px",backgroundColor:"#fdd",marginRight:"-5px"}];
 			if(!barCss){
@@ -321,32 +331,38 @@
 			},false);
 			//滚轮事件函数
 			function wheel(e){
-				if(scrollHeight==null){
-					scrollHeight=element.scrollHeight;
-				}
+				scrollHeight=element.scrollHeight;
 				var direction=e.wheelDelta || -e.detail;
 				height=element.clientHeight;
 				var scrollTop=element.scrollTop || 0;
-				function setBarPosition(scrollTop){
-						element.scrollTop=scrollTop;
-						barBlock.style.top=(scrollTop+height/10)+"px";
-						bar.style.top=(height*8/10)*(scrollTop/(scrollHeight-height))+"px";
+				function setBarPosition(scrollTop,next){
+						var s=scrollTop>next?-1:1;
+						var step=s*7,t=s*(next-scrollTop)/7;
+						window.clearInterval(scrollFlag);
+						scrollFlag=window.setInterval(function(){
+							if(--t<0){window.clearInterval(scrollFlag);}else{
+								scrollTop+=step;
+								element.scrollTop=scrollTop;
+								barBlock.style.top=(scrollTop+height/10)+"px";
+								bar.style.top=(height*8/10)*(scrollTop/(scrollHeight-height))+"px";
+							}
+						},20);
+						///////////////////should be scrollTop=next;
+						//element.scrollTop=scrollTop;
+						//barBlock.style.top=(scrollTop+height/10)+"px";
+						//bar.style.top=(height*8/10)*(scrollTop/(scrollHeight-height))+"px";
 				}
 				if(direction<0){
 					if(scrollTop+50<scrollHeight-height){
-						scrollTop+=50;
-						setBarPosition(scrollTop);
+						setBarPosition(scrollTop,scrollTop+50);
 					}else{
-						scrollTop=scrollHeight-height;
-						setBarPosition(scrollTop);
+						setBarPosition(scrollTop,scrollHeight-height);
 					}
 				}else{
 					if(scrollTop-50>0){
-						scrollTop-=50;
-						setBarPosition(scrollTop);
+						setBarPosition(scrollTop,scrollTop-50);
 					}else{
-						scrollTop=0;
-						setBarPosition(scrollTop);
+						setBarPosition(scrollTop,0);
 					}
 				}
 				//取消事件冒泡，防止嵌套时都滚动
@@ -365,13 +381,12 @@
 			barBlock.onselectstart=function(event){return false;};
 		}
 		
-		
-		
-		
 		changeCurtain.closeSetName(changeCurtain.byId("play"),changeCurtain.byId("name"));
 		changeCurtain.go(changeCurtain.byId("go"),changeCurtain.byId("page2"));
-		changeCurtain.createScrollBar(changeCurtain.byId("page2"),{width:"40px",height:"40px"},{width:"22px",borderRadius:"11px"},"50px");
-		changeCurtain.createScrollBar(changeCurtain.byId("test"),{width:"20px",height:"20px"},{width:"10px",borderRadius:"5px",backgroundColor:"rgba(255,255,255,0.4)"});
+		changeCurtain.createScrollBar(changeCurtain.byId("page2"),{width:"40px",height:"40px"},{width:"22px",borderRadius:"11px"});
+		changeCurtain.createScrollBar(changeCurtain.byId("test"),{width:"20px",height:"20px"},{width:"10px",borderRadius:"5px"});
+		changeCurtain.createScrollBar(changeCurtain.byId("test1"),{width:"20px",height:"30px",backgroundColor:"rgba(255,150,150,0.6)",boxShadow:"0 0 10px 3px #f66 inset"},{width:"20px",borderRadius:"5px",backgroundColor:"rgba(255,150,150,0.5)",boxShadow:"0 0 10px 3px #fff inset"});
+		changeCurtain.createScrollBar(changeCurtain.byId("test2"),{width:"30px",height:"30px",borderRadius:"15px",backgroundColor:"rgba(255,150,150,0.6)",boxShadow:"0 0 10px 3px #f66 inset"},{width:"20px",borderRadius:"5px",backgroundColor:"rgba(255,150,150,0.5)",boxShadow:"0 0 10px 3px #fff inset"});
 	</script>
 	</body>
 </html>
