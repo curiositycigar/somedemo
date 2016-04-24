@@ -1,0 +1,377 @@
+<!doctype html>
+<html>
+	<head>
+		<title>demo</title>
+	<style>
+	html,body,div,button,input{padding:0;margin:0;}
+	button,input{outline: none;}
+	html{width:100%;height:100%;}
+	body{font-family:"Microsoft YaHei";position:relative;
+		width:100%;
+		height:100%;
+	}
+	#gameContainer{
+		width:100%;
+		height:100%;
+	}
+	#start{
+		position:absolute;
+		z-index:100;
+		left:0;
+		top:0;
+		width: 100%;
+		height: 100%;
+		background-color: #f99;
+		overflow: hidden;
+	}
+	#gameName{
+		font-size:50px;
+		font-weight:600;
+		color:#fff;
+		text-align:center;
+		position: absolute;
+		left:50%;
+		top:50%;
+		width:250px;
+		height:50px;
+		line-height:50px;
+		margin-top:-120px;
+		margin-left:-125px;
+	}
+	#setName{
+		position: absolute;
+		left:50%;
+		top:50%;
+		width: 400px;
+		height: 50px;
+		line-height: 50px;
+		margin-top: -25px;
+		margin-left: -198px;
+	}
+	#setName label,#name,#play{display:inline-block;}
+	#setName label{
+		font-size: 18px;
+		font-weight: 600;
+		color:#fff;
+		text-align:right;
+		width:105px;
+		height:50px;
+		margin-right:10px;
+		line-height:50px;
+		border:none;
+	}
+	#name{
+		font-size: 20px;
+		font-weight: 600;
+		color:#f99;
+		width:150px;
+		height:40px;
+		border-radius:20px;
+		background-color:#fff;
+		padding:0 15px;
+		line-height:40px;
+		border:none;
+		transition:all 0.4s ease;
+	}
+	#name:focus{
+		background-color:#f99;
+		box-shadow:0 0 1px 2px #fff;
+		color:#fff;
+	}
+	#play{
+		width: 70px;
+		height: 30px;
+		font-size: 18px;
+		font-weight: 600;
+		margin-left:10px;
+		background-color: #fff;
+		color:#f99;
+		border: none;
+		border-radius: 15px;
+		transition:all 0.3s ease;
+	}
+	#play:hover{
+		background-color:#f99;
+		box-shadow:0 0 1px 2px #fff;
+		color:#fff;
+	}
+	#play:active{
+		background-color:#f77;
+		box-shadow:0 0 2px 4px #fff;
+		color:#fff;
+	}
+	#page1{
+		position:absolute;
+		z-index:90;
+		left:0;
+		top:0;
+		width:100%;
+		height:100%;
+	}
+	#page1 div{
+		position:absolute;
+		font-size:50px;
+		font-weight:600;
+		color:#f99;
+		text-align:center;
+		top:50%;
+		left:50%;
+		width:500px;
+		height:100px;
+		margin-left:-250px;
+		margin-top:-60px;
+	}
+	#page1 button{
+		position:absolute;
+		font-size:40px;
+		font-weight:800;
+		color:#f99;
+		left:50%;
+		top:50%;
+		margin-left:250px;
+		margin-top:-70px;
+		width:90px;
+		height:90px;
+		border-radius:45px;
+		background-color:#fff;
+		border:5px solid #f99;
+		box-shadow:0 0 0 0 #fbb;
+		transition:all 0.3s ease;
+	}
+	#page1 button:hover{
+		background-color:#f99;
+		color:#fff;
+		box-shadow:0 0 10px 5px #faa;
+	}
+	#page1 button:active{
+		box-shadow:0 0 250px 10px #f99;
+	}
+	#page2{
+		position:absolute;
+		z-index:70;
+		left:50%;
+		top:50%;
+		overflow:hidden;
+		margin-left:290px;
+		margin-top:-25px;
+		height:10px;
+		width:10px;
+		border-radius:1000px;
+	}
+	</style>
+	</head>
+	<body>
+	<div id="gameContainer">
+		<div id="start">
+			<div id="gameName">GROWEN</div>
+			<div id="setName">
+				<label for="name">Set Name:</label>
+				<input type="text" id="name" autocomplete="off">
+				<button id="play">play</button>
+			</div>
+		</div>
+		<div id="page1">
+			<div>Welcome <span class="guestName">stranger</span>!</div>
+			<button id="go">GO</button>
+		</div>
+		<div id="page2">
+			<div id="test" style="position:relative;margin:20px;color:#fff;width:200px;height:100px;overflow:hidden;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+			<div style="margin:20px;color:#fff;">"The probe is expected to orbit the red planet, land and deploy a rover all in one mission, which is quite difficult to achieve," said Xu Dazhe, director of China's National Space Administration, at a press conference ahead of April 24 celebrations marking the launch of the country's first satellite 46 years ago.</div>
+		</div>
+		<div id="page3"></div>
+	</div>
+	<script>
+		var changeCurtain={};
+		changeCurtain.byId=function(id){
+			return document.getElementById(id);
+		}
+		//mouseposition
+		changeCurtain.getMousePos=function(element){
+			var pos={x:0,y:0};
+			var left=0,top=0;
+			var current=element;
+			if(element!=document){
+				while(current.tagName!="html" && current.tagName!="HTML"){
+					left+=current.offsetLeft;
+					top+=current.offsetTop;
+					current=current.parentNode;
+				}
+			}
+			console.log(left+":"+top);
+			element.addEventListener("mousemove",function(e){
+				if(e.pageX && e.pageY){
+					pos.x=e.pageX;
+					pos.y=e.pageY;
+				}else{
+					pos.x=e.clientX+document.body.scrollLeft||document.documentElement.scrollLeft;
+					pos.y=e.clientY+document.body.scrollTop||document.documentElement.scrollTop;
+				}
+				pos.x-=left;
+				pos.y-=top;
+			},false);
+			return pos;
+		}
+		//
+		//changeCurtain.mousePos=changeCurtain.getMousePos(document);
+		//伪数组转换
+		changeCurtain.byClass=function(className){
+			var ret=[],i=0;
+			var elements=document.getElementsByClassName(className);
+			for(;i<elements.length;i++){
+				ret.push(elements[i]);
+			}
+			return ret;
+		}
+		//set css
+		changeCurtain.setCss=function(element){
+			var i=1,csss;
+			for(i=1;i<arguments.length;++i){
+				csss=arguments[i];
+				if(typeof csss == "object"){
+					for(item in csss){
+						element.style[item]=csss[item];
+					}
+				}else{
+					console.log("t");
+					throw new Error("need object,but your given are not object!");
+				}
+			}
+		}
+		//close setname
+		changeCurtain.closeSetName=function(element,name){
+			function fn(e){
+				if(name.value!="" && name.value.length>2){
+					changeCurtain.byClass("guestName").map(function(value){value.innerHTML=name.value;});
+					//([]).map.call(document.getElementsByClassName("guestName"),function(value){value.innerHTML=name.value;});
+					changeCurtain.setCss(e.target.parentNode.parentNode,{width:"100%",height:"0",transition:"all 0.6s ease"});
+					element.removeEventListener("click",fn);
+				}else{
+					changeCurtain.setCss(name,{boxShadow:"0 0 50px 2px #f44"});
+				}
+			}
+			var tag=element.addEventListener("click",fn,false);
+		}
+		//close page1
+		changeCurtain.go=function(element,nextPage){
+			function fn(e){
+				e.target.parentNode.style.zIndex="0";
+				changeCurtain.setCss(nextPage,{left:"0",top:"0",margin:"0",width:"100%",height:"100%",backgroundColor:"#f99",borderRadius:"0",transition:"all 1s ease"});
+			}
+			var tag=element.addEventListener("click",fn,false);
+		}
+		//create your scrollbar(在css中设置overflow:hidden)
+		changeCurtain.createScrollBar=function(element,barCss,barWayCss,barRight){
+			var barBlock=document.createElement("div"),
+			    bar=document.createElement("div"),
+			    barWay=document.createElement("div");
+			var pos=null,scrollHeight=null,height=element.clientHeight,width=element.clientwidth;
+			var barBlockCss={position:"absolute",top:"10%",right:barRight||"20px",height:"80%",width:"0"};
+			var barCssDefault=[{position:"absolute",cursor:"pointer",top:"0",right:"0"},{width:"20px",height:"20px",borderRadius:"10px",backgroundColor:"#fff",marginTop:"-10px",marginRight:"-10px"}];
+			var barWayCssDefault=[{position:"absolute",cursor:"pointer",top:"0",right:"0",height:"100%"},{width:"10px",borderRadius:"10px",backgroundColor:"#fdd",marginRight:"-5px"}];
+			if(!barCss){
+				barCss={};
+			}
+			if(!barWayCss){
+				barWayCss={};
+			}
+			if(typeof barCss.width != undefined){
+				barCss.marginRight=-parseInt(barCss.width)/2+"px";
+			}if(typeof barCss.height != undefined){
+				barCss.marginTop=-parseInt(barCss.height)/2+"px";
+			}
+			if(typeof barWayCss.width != undefined){
+				barWayCss.marginRight=-parseInt(barWayCss.width)/2+"px";
+			}
+			changeCurtain.setCss(barBlock,barBlockCss);
+			changeCurtain.setCss(bar,barCssDefault[1],barCss,barCssDefault[0]);
+			changeCurtain.setCss(barWay,barWayCssDefault[1],barWayCss,barWayCssDefault[0]);
+			function fn(){
+				var top=pos.y*100/height;
+				if(top>10 && top<90){
+					var scrollTop=(scrollHeight-height)*(top-10)/80;
+					barBlock.style.top=(scrollTop+height/10)+"px";
+					bar.style.top=((top-10)*height)/100+"px";
+					element.scrollTop=scrollTop;
+				}
+			}
+			bar.addEventListener("mousedown",function(e){
+				if(pos==null){
+					pos=changeCurtain.getMousePos(element);
+				}
+				if(scrollHeight==null){
+					scrollHeight=element.scrollHeight;
+				}
+				//取消选中
+				element.onselectstart=function(e){return false;}
+				height=element.clientHeight;
+				element.addEventListener("mousemove",fn,false);
+			});
+			document.addEventListener("mouseup",function(e){
+				//恢复选中
+				element.onselectstart=function(e){return true;}
+				element.removeEventListener("mousemove",fn);
+			},false);
+			//滚轮事件函数
+			function wheel(e){
+				if(scrollHeight==null){
+					scrollHeight=element.scrollHeight;
+				}
+				var direction=e.wheelDelta || -e.detail;
+				height=element.clientHeight;
+				var scrollTop=element.scrollTop || 0;
+				function setBarPosition(scrollTop){
+						element.scrollTop=scrollTop;
+						barBlock.style.top=(scrollTop+height/10)+"px";
+						bar.style.top=(height*8/10)*(scrollTop/(scrollHeight-height))+"px";
+				}
+				if(direction<0){
+					if(scrollTop+50<scrollHeight-height){
+						scrollTop+=50;
+						setBarPosition(scrollTop);
+					}else{
+						scrollTop=scrollHeight-height;
+						setBarPosition(scrollTop);
+					}
+				}else{
+					if(scrollTop-50>0){
+						scrollTop-=50;
+						setBarPosition(scrollTop);
+					}else{
+						scrollTop=0;
+						setBarPosition(scrollTop);
+					}
+				}
+				//取消事件冒泡，防止嵌套时都滚动
+				if(e && e.stopPropagation){
+					 e.stopPropagation();
+				}else{
+					 window.event.cancelBubble = true;
+				}
+			}
+			element.addEventListener("onmousewheel",wheel,false);
+			element.addEventListener("DOMMouseScroll",wheel,false);
+			element.addEventListener("mousewheel",wheel,false);
+			barBlock.appendChild(barWay);
+			barBlock.appendChild(bar);
+			element.appendChild(barBlock);
+			barBlock.onselectstart=function(event){return false;};
+		}
+		
+		
+		
+		
+		changeCurtain.closeSetName(changeCurtain.byId("play"),changeCurtain.byId("name"));
+		changeCurtain.go(changeCurtain.byId("go"),changeCurtain.byId("page2"));
+		changeCurtain.createScrollBar(changeCurtain.byId("page2"),{width:"40px",height:"40px"},{width:"22px",borderRadius:"11px"},"50px");
+		changeCurtain.createScrollBar(changeCurtain.byId("test"),{width:"20px",height:"20px"},{width:"10px",borderRadius:"5px",backgroundColor:"rgba(255,255,255,0.4)"});
+	</script>
+	</body>
+</html>
