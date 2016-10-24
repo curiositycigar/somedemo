@@ -1,0 +1,165 @@
+<html>
+	<head>
+    	<title>dragg</title>
+        <meta charset="gb2312" />
+    </head>
+    <body>
+    	<div style="margin:5px;">
+    	模式选择
+    	<select id="selected">
+        	<option value="0" selected>绘画模式</option>
+            <option value="1">移动模式</option>
+        </select>
+        </div>
+    	<canvas id="canvas" style="display:block; border:solid 1px #000;cursor:default;" width="600" height="400"></canvas>
+        <script>
+			var canvas=document.getElementById("canvas"),
+				context=canvas.getContext("2d"),
+				circleo={},
+				mode=0,
+				dragging=false,
+				circle=[],
+				imagedata;
+				context.fillStyle="rgba(200,200,200,1);";
+				context.lineWidth=3;
+			var outcanvas=document.createElement("canvas"),
+				bottomimagedata,
+				topimagedata,//移动后的绘图表面
+				choose,
+				x_o,
+				y_o;
+				outcanvas.id="outcanvas";
+				outcanvas.width=600;
+				outcanvas.height=400;
+				outcontext=outcanvas.getContext("2d");
+				outcontext.fillStyle="rgba(200,200,200,1);";
+				outcontext.lineWidth=3;
+			document.getElementById("selected").onchange=function (){
+				mode=parseInt(document.getElementById("selected").options[document.getElementById("selected").selectedIndex].value);
+			}
+			function getCircle(circleo,loc){
+				return {
+					x:circleo.x,
+					y:circleo.y,
+					r:Math.sqrt((circleo.x-loc.x)*(circleo.x-loc.x)+(circleo.y-loc.y)*(circleo.y-loc.y))
+				}
+			}
+			function wTc(x,y){
+				var rect=canvas.getBoundingClientRect();
+				return{
+					x:x-rect.left*(canvas.width/rect.width),
+					y:y-rect.top*(canvas.height/rect.height)
+				}
+			}
+			//画圆函数
+			function  drawCircle(x,y,r){
+				context.beginPath();
+				context.arc(x,y,r,0,2*Math.PI,false);
+				context.stroke();
+				context.fill();
+			}
+			function updateCircle(loc){
+				drawCircle(loc.x-x_o,loc.y-y_o,circle[choose].r);
+			}
+			function topImage(){
+				var n=circle.length;
+				for(var i=choose+1;i<n;i++){
+					context.beginPath();
+					context.arc(circle[i].x,circle[i].y,circle[i].r,0,2*Math.PI,false);
+					context.stroke();
+					context.fill();
+				}
+				
+			}
+			function finalCircle(loc){
+				context.lineWidth=3;
+				drawCircle(loc.x-x_o,loc.y-y_o,circle[choose].r);
+				circle[choose].x=loc.x-x_o;
+				circle[choose].y=loc.y-y_o;
+			}
+			//判断鼠标选中的圆
+			function judge(x,y){
+				var distance;
+				for(var i=circle.length-1;i>=0;i--){
+					distance=Math.sqrt((x-circle[i].x)*(x-circle[i].x)+(y-circle[i].y)*(y-circle[i].y));
+					if(distance<circle[i].r){
+						return i;
+					}
+				}
+				return -1;
+			}
+			//保存和重绘绘图表面
+			function saveImageData(){
+				imagedata=context.getImageData(0,0,canvas.width,canvas.height);
+			}
+			function saveOutImageData(n,m){
+				context.lineWidth=1;
+				outcontext.clearRect(0,0,outcanvas.width,outcanvas.height);
+				for(var i=0;i<m;i++){
+					outcontext.beginPath();
+					outcontext.arc(circle[i].x,circle[i].y,circle[i].r,0,2*Math.PI,false);
+					outcontext.stroke();
+					outcontext.fill();
+				}
+				bottomimagedata=outcontext.getImageData(0,0,outcanvas.width,outcanvas.height);
+				for(var i=m+1;i<n;i++){
+					outcontext.beginPath();
+					outcontext.arc(circle[i].x,circle[i].y,circle[i].r,0,2*Math.PI,false);
+					outcontext.stroke();
+					outcontext.fill();
+				}
+				topimagedata=outcontext.getImageData(0,0,outcanvas.width,outcanvas.height);
+			}
+			function restoreImageData(data){
+				context.putImageData(data,0,0);
+			}
+			//离屏canvas中保存和重绘绘图表面
+			canvas.onmousedown=function(e){
+				circleo=wTc(e.clientX,e.clientY);
+				if(mode==1){
+					choose=parseInt(judge(circleo.x,circleo.y));
+					if(choose!=-1){
+						canvas.style.cursor="pointer";
+						x_o=circleo.x-circle[choose].x;
+						y_o=circleo.y-circle[choose].y;
+						saveOutImageData(circle.length,choose);
+						dragging=true;
+					}
+				}else if(mode==0){
+					saveImageData();
+					dragging=true;
+				}
+			}
+			canvas.onmousemove=function(e){
+				var loc=wTc(e.clientX,e.clientY);
+				if(dragging){
+					if(mode==1){
+						restoreImageData(topimagedata);
+						updateCircle(loc);
+					}else if(mode==0){
+						restoreImageData(imagedata);
+						drawCircle(circleo.x,circleo.y,Math.sqrt((circleo.x-loc.x)*(circleo.x-loc.x)+(circleo.y-loc.y)*(circleo.y-loc.y)));
+					}
+				}
+			}
+			canvas.onmouseup=function(e){
+				var loc=wTc(e.clientX,e.clientY);
+				if(dragging){
+					if(mode==0){
+						restoreImageData(imagedata);
+						drawCircle(circleo.x,circleo.y,Math.sqrt((circleo.x-loc.x)*(circleo.x-loc.x)+(circleo.y-loc.y)*(circleo.y-loc.y)));
+						var c=getCircle(circleo,loc);
+						circle.push(c);
+					}else if(mode==1){
+						restoreImageData(bottomimagedata);
+						updateCircle(loc);
+						finalCircle(loc);
+						topImage();
+					}
+				}
+				dragging=false;
+				canvas.style.cursor="default";
+			}
+        </script>
+    </body>
+</html>
