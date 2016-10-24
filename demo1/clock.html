@@ -1,0 +1,82 @@
+<html>
+	<head>
+    	<title>duang~</title>
+    </head>
+    <body>
+    	<canvas id="canvas" width="600" height="500">not supported</canvas>
+        <script>
+		//360/12=30;   
+		//
+		//
+			var canvas=document.getElementById("canvas"),
+				context=canvas.getContext('2d'),
+				imgedata;
+			context.fillStyle="rgba(200,200,255,1)";
+			context.shadowColor="rgba(100,100,100,0.8)";
+			context.shadowOffsetX=4;
+			context.shadowOffsetY=6;
+			context.shadowBlur=5;
+			context.lineCap="round";
+			
+			context.beginPath();
+			context.arc(300,250,200,0,2*Math.PI,false);
+			context.arc(300,250,180,0,2*Math.PI,true);
+			context.fill();
+			
+			
+			for(var j=1,i=-2/6;i<=1.5;j++,i+=1/6){
+				var x=Math.cos(i*Math.PI)*160+295;
+				var y=Math.sin(i*Math.PI)*160+260;
+				context.font="30px palatino";
+				context.fillStyle="blue";
+				context.fillText(j+"",x,y);
+			}
+			imagedata=context.getImageData(0,0,canvas.width,canvas.height);
+			function drawline(){
+				context.putImageData(imagedata,0,0);
+				var time=new Date();
+				var h=time.getHours();
+				if(h>12){h=h-12;}
+				var m=time.getMinutes();
+				var s=time.getSeconds();
+
+				var x=Math.cos((-1/2+s/30)*Math.PI)*160+295;
+				var y=Math.sin((-1/2+s/30)*Math.PI)*160+260;
+				context.beginPath();
+				context.moveTo(300,250);
+				context.lineTo(x,y);
+				context.strokeStyle="rgba(200,200,255,1)";
+				context.lineWidth=10;
+				context.stroke();
+				
+				x=Math.cos((-1/2+m/30)*Math.PI)*140+295;
+				y=Math.sin((-1/2+m/30)*Math.PI)*140+260;
+				context.beginPath();
+				context.moveTo(300,250);
+				context.lineTo(x,y);
+				context.strokeStyle="rgba(200,200,255,1)";
+				context.lineWidth=10;
+				context.stroke();
+				
+				x=Math.cos((m/360+(-1/2+h/6))*Math.PI)*120+295;   //	m/360
+				y=Math.sin((m/360+(-1/2+h/6))*Math.PI)*120+260;
+				context.beginPath();
+				context.moveTo(300,250);
+				context.lineTo(x,y);
+				context.strokeStyle="rgba(200,200,255,1)";
+				context.lineWidth=10;
+				context.stroke();
+				
+				context.fillStyle="rgba(200,200,255,1)";
+				context.beginPath();
+				context.arc(300,250,10,0,2*Math.PI,true);
+				context.fill();
+				
+				context.strokeStyle="black";
+				context.lineWidth=1;
+			}
+			drawline();
+			window.setInterval(drawline,1000);
+		</script>
+    </body>
+</html>
