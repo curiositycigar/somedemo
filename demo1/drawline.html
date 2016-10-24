@@ -1,0 +1,90 @@
+<html>
+	<head>
+    	<title>canvas</title>
+    </head>
+    <body>
+    	
+    	<canvas id="canvas" width="700" height="500" style="border:solid 1px #000;" >not supported</canvas>
+        <div id="di">0:0</div>
+    <script type="text/javascript">
+		var canvas=document.getElementById("canvas"),
+		    context=canvas.getContext("2d"),
+		    drawingSurfaceImageData,
+			mousedown={},
+			rubberbandRect={},
+			dragging=false;
+		//转换坐标
+		function windowTocanvas(x,y){
+			var bbox=canvas.getBoundingClientRect();
+			return {
+				x:x-bbox.left*(canvas.width/bbox.width),
+				y:y-bbox.top*(canvas.height/bbox.height)
+			};
+		}
+		//保存绘图表面
+		function saveDrawingSurface(){
+			drawingSurfaceImageData=context.getImageData(0,0,canvas.width,canvas.height);
+		}
+		function restoreDrawingSurface(){
+			context.putImageData(drawingSurfaceImageData,0,0);
+		}
+		function update(loc){
+			updateRubberbandrect(loc);
+			drawLine(loc);
+		}
+		function updateRubberbandrect(loc){
+			rubberbandRect.width=Math.abs(loc.x-mousedown.x);
+			rubberbandRect.height=Math.abs(loc.y-mousedown.y);
+			if(loc.x>mousedown.x){
+				rubberbandRect.left=mousedown.x;
+			}else{
+				rubberbandRect.left=loc.x;
+			}
+			if(loc.y>mousedown.y){
+				rubberbandRect.top=mousedown.y;
+			}else{
+				rubberbandRect.top=loc.y;
+			}
+			context.lineWidth=0.5;
+			context.beginPath();
+			context.rect(rubberbandRect.left,rubberbandRect.top,rubberbandRect.width,rubberbandRect.height);
+			context.stroke();
+		}
+		function drawLine(loc){
+			context.lineWidth=2;
+			context.beginPath();
+			context.moveTo(mousedown.x,mousedown.y);
+			context.lineTo(loc.x,loc.y);
+			context.stroke();
+			context.beginPath();
+			context.arc(mousedown.x,mousedown.y,Math.sqrt((loc.y-mousedown.y)*(loc.y-mousedown.y)+(loc.x-mousedown.x)*(loc.x-mousedown.x)),0,2*Math.PI,false);
+			context.stroke();
+		}
+		//事件处理
+		canvas.onmousedown=function(e){
+			var loc=windowTocanvas(e.clientX,e.clientY);
+			e.preventDefault();
+			saveDrawingSurface();
+			mousedown.x=loc.x;
+			mousedown.y=loc.y;
+			dragging=true;
+		}
+		canvas.onmousemove=function(e){
+			var loc;
+			if(dragging){
+				e.preventDefault();
+				loc=windowTocanvas(e.clientX,e.clientY);
+				restoreDrawingSurface();
+				update(loc);
+			}
+		}
+		canvas.onmouseup=function(e){
+			var loc=windowTocanvas(e.clientX,e.clientY);
+			e.preventDefault();
+			restoreDrawingSurface();
+			drawLine(loc);
+			dragging=false;
+		}
+    </script>
+    </body>
+</html>
