@@ -1,6 +1,7 @@
 #原生JS简单轮播图
-@(HTML)
 ```
+HTML
+***
 <div id="focus">
 	<ul class="cslider">
 		<li class="cslider-item">
