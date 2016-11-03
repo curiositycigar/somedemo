@@ -49,4 +49,4 @@ cSlider(document.getElementById("focus"),{
 > }
 > ```
 
-**[点击](http://curiositycigar.github.io/demo/cSlider/index.html)**查看demo
+**[点击查看demo](http://curiositycigar.github.io/demo/cSlider/index.html)**
