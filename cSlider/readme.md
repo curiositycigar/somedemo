@@ -30,7 +30,7 @@ cSlider(document.getElementById("focus"),{
 	scale: 0.5
 });
 ```
-> #####调用方式：
+#####调用方式：
 >```
 >cSlider(element, options);
 >```
