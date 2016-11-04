@@ -356,6 +356,10 @@ function supportCss3(style) {
 //		arrow:true
 //	}
 	window.cSlider = function(el, options){
+		if(el.getAttribute("c-slider") == "c-slider"){
+			return undefined;
+		}
+		el.setAttribute("c-slider","c-slider");
 		//获取DOM节点
 		var wrap = el.getElementsByTagName("ul")[0],
 			items = wrap.getElementsByTagName("li"),
