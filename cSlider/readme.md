@@ -31,9 +31,9 @@ cSlider(document.getElementById("focus"),{
 });
 ```
 #####调用方式：
->```
->cSlider(element, options);
->```
+```
+cSlider(element, options);
+```
 > **element:** 所绑定的元素
 > ```
 > document.getElementById("focus");
