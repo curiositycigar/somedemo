@@ -2,7 +2,7 @@
 
 >　支持拖动，左右箭头，下方图片导航
 
-***HTML***
+#####HTML
 ```
 <div id="focus">
 	<ul class="cslider">
@@ -21,7 +21,7 @@
 	</ul>
 </div>
 ```
-***JavaScript***
+#####JavaScript
 ```
 cSlider(document.getElementById("focus"),{
 	drag: true,
