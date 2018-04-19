@@ -1,0 +1,305 @@
+<html>
+	<head>
+		<title>Crazy bicycle version:0.1.1</title>
+		<meta charset="utf-8"/>
+		<style>
+			*{font-family:Microsoft YaHei;}
+			div{position:absolute;text-align:center;cursor:pointer;font-size:30px;}
+			.car{
+				width:70px;height:40px;top:310px;
+			}
+			#div1{
+				width:51px;height:33px;
+				background:url(bicycle.gif); background-position:-4px -13px; background-size:60px 60px;
+			}
+			#startmenu{
+				display:block;
+				width:900px;
+				height:600px;
+				background:#fff;
+				z-index:2;
+			}
+			#levelmenu{
+				display:block;
+				width:900px;
+				height:600px;
+				background:#fff;
+				z-index:1;
+			}
+			#diemenu{
+				display:none;
+				width:900px;
+				height:600px;
+				background:#fff;
+				z-index:1;
+			}
+			#plane1{top:190px;left:450px;}
+			#plane2{top:190px;left:450px;}
+			#plane3{top:190px;left:450px;}
+			#line{top:352px; background:#fff;border:solid 1px #000; width:900px;height:0px;}
+			.text:hover{font-size:33px;color:#007;}
+		</style>
+	</head>
+	<body id="b">
+		<div class="game" style="width:900px;height:600px;background:#fff;overflow:hidden; border:solid 1px #000;">
+		<div id="startmenu">
+			<div class="text" style="width:900px;top:100px;">疯狂的自行车</div>
+			<div style="top:100px;left:250px; width:51px;height:33px;background:url(bicycle.gif); background-position:-4px -13px; background-size:60px 60px;"></div>
+			<div class="text" id="start" style="width:900px;top:200px;" onclick="start()">开始游戏</div>
+			<div class="text" id="quit" style="width:900px;top:300px;" onclick="window.close()">退出游戏</div>
+			<div style="width:900px;top:400px;font-size:15px;"><b>操作：</b>左右键移动，空格键跳跃<br/><b>小提示：</b>在空中可按左右键调整方向<br/>死亡后按回车可<b>再试一次</b></div>
+		</div>
+		<div id="levelmenu">
+			<div class="text" style="width:900px;top:100px;" onclick="chooseLevel(1)">原野飙车</div>
+			<div class="text" style="width:900px;top:200px;" onclick="chooseLevel(2)">车流不息</div>
+			<div class="text" style="width:900px;top:300px;" onclick="chooseLevel(3)">走投无路</div>
+			<div class="text" style="width:900px;top:400px;" onclick="menu()">返回</div>
+		</div>
+		<div id="diemenu">
+			<div style="width:900px;top:100px;">你失败了</div>
+			<div id="diescore" style="width:900px;top:200px;"></div>
+			<div class="text" style="width:900px;top:300px;" onclick="menu()">回主菜单</div>
+			<div class="text" style="width:900px;top:400px;" onclick="chooseLevel(0)">再试一次</div>
+		</div>
+		<div id="bgimg" style="width:900px;height:400px;top:-90px;"></div>
+		<div id="sun" style="width:70px;height:70px; left:500px;top:10px;background:url(sun.gif);background-size:70px 70px;"></div>
+		<div id="cloud" style="width:900px;height:400px;top:0px;left:180px;background:url(cloud.png) no-repeat;background-size:900px 200px;;"></div>
+		<div class="car" id="div1"></div>
+		<div class="car" id="bus1" style="background:url(bus1.gif);background-position:0px -5px; background-size:70px 50px;display:none;"></div>
+		<div class="car" id="bus2" style="background:url(bus2.gif);background-position:0px -5px; background-size:70px 50px;display:none;"></div>
+		<div class="car" id="bus3" style="background:url(bus1.gif);background-position:0px -5px; background-size:70px 50px;display:none;"></div>
+		<div class="car" id="bus4" style="background:url(truck.gif) no-repeat;background-position:-8px 0px; background-size:70px 50px;display:none;"></div>
+		<div class="car" id="plane1" style="background:url(plane1.gif);background-position:0px -5px; background-size:70px 50px;display:none;"></div>
+		<div class="car" id="plane2" style="background:url(plane2.gif);background-position:0px -5px; background-size:70px 50px;display:none;"></div>
+		<div class="car" id="plane3" style="background:url(plane1.gif);background-position:0px -5px; background-size:70px 50px;display:none;"></div>
+		<div id="score" style="left:20px;top:10px;"></div>
+		<div class="car" id="line"></div>
+		</div>
+		<div id="music" width="0px" height="0px"><embed id="di" src="bg.mp3" width=0 height=0 type="audio/mpeg" loop="true" autostart="true"></div>
+	<script>
+		var lev=0;
+		//分数
+		var score=0;
+		//计时器
+		var temp;
+		var temp2;
+		//自行车状态
+		flag=0;
+		//自行车高度
+		i=1;
+		//自行车数据
+		var l=100;
+		var t=320;
+		var tflag=t;
+		//背景位置
+		var p=0;
+		//构造函数   左边l，上边t，宽w，速度s
+		function Item(l,t,w,h,s,id){
+			this.l=l;
+			this.t=t;
+			this.w=w;
+			this.h=h;
+			this.s=s;
+			this.id=id;
+		}
+		Item.prototype.changePosition=function(){
+			this.l-=this.s;
+			document.getElementById(this.id).style.left=this.l+"px";
+		}
+		Item.prototype.changePosition2=function(){
+			this.l+=this.s;
+			document.getElementById(this.id).style.left=this.l+"px";
+		}
+		Item.prototype.changeCar=function(l,t,s){
+			var rand=Math.floor(Math.random()*3);
+		}
+		var car=new Array();
+		car[0]=new Item(300,310,70,40,2,"bus1");
+		car[1]=new Item(500,310,70,40,2,"bus2");
+		car[2]=new Item(700,310,70,40,2,"bus3");
+		car[3]=new Item(1000,310,70,30,2,"bus4");
+		var plane=new Array();
+		plane[0]=new Item(1000,190,70,50,3,"plane1");
+		plane[1]=new Item(1000,190,60,50,3,"plane2");
+		plane[2]=new Item(1000,190,70,50,3,"plane3");
+		//开始游戏
+		function start(){
+			document.getElementById("startmenu").style.display="none";
+			document.getElementById("div1").style.left="300px";
+			document.getElementById("div1").style.top="300px";
+			document.getElementById("diemenu").style.display="none";
+		}
+		//选择关卡
+		function chooseLevel(level){
+			score=0;
+			document.getElementById("bus1").style.display="none";
+			document.getElementById("bus2").style.display="none";
+			document.getElementById("bus3").style.display="none";
+			document.getElementById("bus4").style.display="none";
+			document.getElementById("plane1").style.display="none";
+			document.getElementById("plane2").style.display="none";
+			document.getElementById("plane3").style.display="none";
+			if(level==0){level=lev;
+				document.getElementById("diemenu").style.display="none";
+			}
+			l=100;
+			document.getElementById("levelmenu").style.display="none";
+			if(level==1){
+				lev=1;
+				p=0;
+				document.getElementById("bgimg").style.background="url(m.png) no-repeat";//m.png
+				document.getElementById("bus1").style.display="block";
+				document.getElementById("bus2").style.display="block";
+				document.getElementById("bus3").style.display="block";
+				car[0].l=300;
+				car[1].l=600;
+				car[2].l=900;
+				temp2=window.setInterval(function(){
+					score++;
+					if(p<-660) p=0;//p<-660
+					p--;
+					document.getElementById("bgimg").style.backgroundPosition=p+"px 0px";//背景位置
+					document.getElementById("score").innerHTML="分数："+score;
+					document.getElementById("div1").style.left=l+"px"; //绘制左右移动动画
+					document.getElementById("div1").style.top=tflag+"px"; //绘制跳的动画
+					//绘制BUS
+					for(var i=0;i<3;i++){
+						if(car[i].l<-70) car[i].l=900+Math.floor(Math.random()*70);
+						car[i].changePosition();
+					}
+					check(3);
+					
+				},10);
+			}else if(level==2){
+				lev=2;
+				p=0;
+				document.getElementById("bgimg").style.background="url(country.png) no-repeat";
+				document.getElementById("bus1").style.display="block";
+				document.getElementById("bus2").style.display="block";
+				document.getElementById("bus3").style.display="block";
+				document.getElementById("bus4").style.display="block";
+				document.getElementById("plane1").style.display="block";
+				car[0].l=300;
+				car[1].l=550;
+				car[2].l=800;
+				car[3].l=1000;
+				plane[0].l=500;
+				temp2=window.setInterval(function(){
+					score+=2;
+					if(p<-590) p=0;
+					p--;
+					document.getElementById("bgimg").style.backgroundPosition=p+"px 200px";//背景位置
+					document.getElementById("score").innerHTML="分数："+score;
+					document.getElementById("div1").style.left=l+"px"; //绘制左右移动动画
+					document.getElementById("div1").style.top=tflag+"px"; //绘制跳的动画
+					//绘制BUS
+					for(var i=0;i<4;i++){
+						if(car[i].l<-70) car[i].l=900+Math.floor(Math.random()*80);
+						car[i].changePosition();
+					}
+					for(var i=0;i<1;i++){
+						if(plane[i].l>1100) plane[i].l=-280+Math.floor(Math.random()*200);
+						plane[i].changePosition2();
+					}
+					check(5);
+				},10);
+			}else if(level==3){
+				lev=3;
+				p=0;
+				document.getElementById("bgimg").style.background="url(built.png) no-repeat";//
+				document.getElementById("bus1").style.display="block";
+				document.getElementById("bus2").style.display="block";
+				document.getElementById("bus3").style.display="block";
+				document.getElementById("bus4").style.display="block";
+				document.getElementById("plane1").style.display="block";
+				document.getElementById("plane2").style.display="block";
+				document.getElementById("plane3").style.display="block";
+				car[0].l=300;
+				car[1].l=550;
+				car[2].l=800;
+				car[3].l=1000;
+				plane[0].l=200;
+				plane[1].l=600;
+				plane[2].l=1000;
+				temp2=window.setInterval(function(){
+					score+=3;
+					if(p<-776) p=0;//
+					p--;
+					document.getElementById("bgimg").style.backgroundPosition=p+"px 200px";//背景位置
+					document.getElementById("score").innerHTML="分数："+score;
+					document.getElementById("div1").style.left=l+"px"; //绘制左右移动动画
+					document.getElementById("div1").style.top=tflag+"px"; //绘制跳的动画
+					//绘制BUS
+					for(var i=0;i<4;i++){
+						if(car[i].l<-70) car[i].l=900+Math.floor(Math.random()*80);
+						car[i].changePosition();
+					}
+					for(var i=0;i<3;i++){
+						if(plane[i].l>1100) plane[i].l=-200+Math.floor(Math.random()*70);
+						plane[i].changePosition2();
+					}
+					check(7);
+				},10);
+			}
+		}
+		//回到主菜单
+		function menu(){
+			document.getElementById("music").innerHTML='<embed src="bg.mp3" width=0 height=0 type="audio/mpeg" loop="true" autostart="true">';
+			document.getElementById("diemenu").style.display="none";
+			document.getElementById("startmenu").style.display="block";
+			document.getElementById("levelmenu").style.display="block";
+		}
+		//
+		document.getElementById("b").onkeydown=function(event){
+			if(event.keyCode==37){   //left
+				if(l>0) l-=3;
+			}else if(event.keyCode==39){   //left
+				if(l<900) l+=3;
+			}if(event.keyCode==32){
+				if(flag==0){flag=1;
+					temp=window.setInterval(function(){
+						tflag=t-3*Math.floor(Math.sin(i*Math.PI/100)*40);
+						i+=1;
+						if(i>=101){
+							i=1;
+							tflag=t;
+							flag=0;
+							window.clearInterval(temp);
+						}
+					},10);
+				}
+			
+			}if(event.keyCode==13){
+				var dis=document.getElementById("diemenu").style.display;
+				if(dis!="none")
+					chooseLevel(0);
+			}
+		};
+		//碰撞检测
+		function check(n){
+			if(n>4){
+				var c=4;
+				var p=n-4;
+			}else{
+				var c=n;
+				var p=0;
+			}
+			for(var i=0;i<c;i++){
+				if(l+50>car[i].l && l<car[i].l+car[i].w && tflag>285){
+					window.clearInterval(temp2);
+					document.getElementById("diemenu").style.display="block";
+					document.getElementById("diescore").innerHTML="得分: "+score;
+				}
+			}
+			for(var i=0;i<p;i++){
+				if(l+50>plane[i].l && l<plane[i].l+car[i].w && tflag<185+plane[i].h){
+					window.clearInterval(temp2);
+					document.getElementById("diemenu").style.display="block";
+					document.getElementById("diescore").innerHTML="得分: "+score;
+				}
+				
+			}
+		}
+	</script>
+	</body>
+</html>
