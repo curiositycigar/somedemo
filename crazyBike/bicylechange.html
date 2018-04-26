@@ -250,7 +250,8 @@
 			document.getElementById("levelmenu").style.display="block";
 		}
 		//
-		document.getElementById("b").onkeydown=function(event){
+		window.onkeydown=function(event){
+			console.log(event.keyCode)
 			if(event.keyCode==37){   //left
 				if(l>0) l-=3;
 			}else if(event.keyCode==39){   //left
