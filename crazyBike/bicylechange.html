@@ -91,6 +91,7 @@
 		var l=100;
 		var t=320;
 		var tflag=t;
+		var pressingKey=null;
 		//背景位置
 		var p=0;
 		//构造函数   左边l，上边t，宽w，速度s
@@ -155,6 +156,11 @@
 				car[1].l=600;
 				car[2].l=900;
 				temp2=window.setInterval(function(){
+					if(pressingKey === 'left'){
+						l-=3
+					} else if(pressingKey === 'right') {
+						l+=3
+					}
 					score++;
 					if(p<-660) p=0;//p<-660
 					p--;
@@ -185,6 +191,11 @@
 				car[3].l=1000;
 				plane[0].l=500;
 				temp2=window.setInterval(function(){
+					if(pressingKey === 'left'){
+						l-=3
+					} else if(pressingKey === 'right') {
+						l+=3
+					}
 					score+=2;
 					if(p<-590) p=0;
 					p--;
@@ -222,6 +233,11 @@
 				plane[1].l=600;
 				plane[2].l=1000;
 				temp2=window.setInterval(function(){
+					if(pressingKey === 'left'){
+						l-=3
+					} else if(pressingKey === 'right') {
+						l+=3
+					}
 					score+=3;
 					if(p<-776) p=0;//
 					p--;
@@ -253,9 +269,9 @@
 		window.onkeydown=function(event){
 			console.log(event.keyCode)
 			if(event.keyCode==37){   //left
-				if(l>0) l-=3;
+				if(l>0) pressingKey='left';
 			}else if(event.keyCode==39){   //left
-				if(l<900) l+=3;
+				if(l<900) pressingKey='right';
 			}if(event.keyCode==32){
 				if(flag==0){flag=1;
 					temp=window.setInterval(function(){
@@ -274,6 +290,15 @@
 				var dis=document.getElementById("diemenu").style.display;
 				if(dis!="none")
 					chooseLevel(0);
+			}
+		};
+		//
+		window.onkeyup=function(event){
+			console.log(event.keyCode)
+			if(event.keyCode==37){   //left
+				if(l>0) pressingKey=null;
+			}else if(event.keyCode==39){   //left
+				if(l<900) pressingKey=null;
 			}
 		};
 		//碰撞检测
